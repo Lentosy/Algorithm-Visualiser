@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Name="listContainer" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left" 
+                    Height="399" 
+                    Margin="10,10,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="772">
+        </StackPanel>
+
     </Grid>
 </Window>
