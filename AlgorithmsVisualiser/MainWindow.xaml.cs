@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,56 +36,48 @@ namespace AlgorithmsVisualiser
             InitializeListOrders();
 
             list.Fill(new AscendingFillStrategy(), 50);
+
+            currentSortAlgorithm = new InsertionSort(listContainer);
             currentSortAlgorithm.InitializeContainer(list);
         }
 
         #region Private methods
         private void InitializeSortingAlgorithms()
         {
-            ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem()
+            foreach (ESortingAlgorithm sortingAlgorithm in Enum.GetValues(typeof(ESortingAlgorithm)))
             {
-                Tag = ESortingAlgorithm.INSERTION_SORT,
-                Content = "Insertion Sort",
-                IsSelected = true
-            });
+                string[] parts = sortingAlgorithm.ToString().Split('_');
+                StringBuilder name = new StringBuilder();
+                foreach (string s in parts)
+                {
+                    name.Append(s.InitCap());
+                    name.Append(" ");
+                }
 
-            ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem()
-            {
-                Tag = ESortingAlgorithm.SELECTION_SORT,
-                Content = "Selection Sort",
-            });
+                ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem
+                {
+                    Tag = sortingAlgorithm,
+                    Content = name.ToString(),
+                });
+            }
 
-            currentSortAlgorithm = new InsertionSort(listContainer);
+            ((ComboBoxItem)ComboBoxSortingAlgorithms.Items[0]).IsSelected = true;
         }
 
         private void InitializeListOrders()
         {
-            ComboBoxListOrder.Items.Add(new ComboBoxItem
+            foreach (EOrder order in Enum.GetValues(typeof(EOrder)))
             {
-                Tag = EOrder.ASCENDING,
-                Content = "Ascending",
-                IsSelected = true
-            });
-            ComboBoxListOrder.Items.Add(new ComboBoxItem
-            {
-                Tag = EOrder.DESCENDING,
-                Content = "Descending"
-            });
-            ComboBoxListOrder.Items.Add(new ComboBoxItem
-            {
-                Tag = EOrder.RANDOM,
-                Content = "Random"
-            });
-            ComboBoxListOrder.Items.Add(new ComboBoxItem
-            {
-                Tag = EOrder.CONCAVE,
-                Content = "Concave"
-            });
-            ComboBoxListOrder.Items.Add(new ComboBoxItem
-            {
-                Tag = EOrder.CONVEX,
-                Content = "Convex"
-            });
+                string name = order.ToString().ToLower();
+
+                ComboBoxListOrder.Items.Add(new ComboBoxItem
+                {
+                    Tag = order,
+                    Content = order.ToString().InitCap()
+                });
+            }
+
+            ((ComboBoxItem)ComboBoxListOrder.Items[0]).IsSelected = true;
         }
         #endregion
 
@@ -99,7 +92,6 @@ namespace AlgorithmsVisualiser
             currentSortAlgorithm.Sort(list);
         }
 
-
         /// <summary>
         /// Generates a list
         /// </summary>
@@ -113,6 +105,7 @@ namespace AlgorithmsVisualiser
             list.Clear();
 
             IFillStrategy fillStrategy;
+            //should make this even better somehow
             switch (cItem.Tag)
             {
                 case EOrder.ASCENDING:
@@ -138,26 +131,11 @@ namespace AlgorithmsVisualiser
             currentSortAlgorithm.InitializeContainer(list);
         }
 
-        private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            LabelElementCount.Content = (int)SliderElementCount.Value;
-        }
-        
-
-        private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            int msDelay = (int)SliderSpeed.Value;
-            LabelSpeed.Content = msDelay;
-            if(currentSortAlgorithm != null)
-            {
-                currentSortAlgorithm.Delay = msDelay;
-            }
-        }
-
         private void ComboBoxSortingAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem cItem = (ComboBoxItem)ComboBoxSortingAlgorithms.SelectedItem;
-            switch (cItem.Tag) {
+            switch (cItem.Tag)
+            {
                 case ESortingAlgorithm.INSERTION_SORT:
                     currentSortAlgorithm = new InsertionSort(listContainer);
                     break;
@@ -167,6 +145,23 @@ namespace AlgorithmsVisualiser
             }
 
         }
+
+        private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            LabelElementCount.Content = (int)SliderElementCount.Value;
+        }
+
+
+        private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int msDelay = (int)SliderSpeed.Value;
+            LabelSpeed.Content = msDelay;
+            if (currentSortAlgorithm != null)
+            {
+                currentSortAlgorithm.Delay = msDelay;
+            }
+        }
+
         #endregion
 
 

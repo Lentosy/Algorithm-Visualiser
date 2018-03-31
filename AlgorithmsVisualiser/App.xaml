@@ -4,6 +4,20 @@
              xmlns:local="clr-namespace:AlgorithmsVisualiser"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Orange"/>
+        </Style>
+        
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="Orange"/>
+        </Style>
+        
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Orange"/>
+        </Style>
+        
+        
     </Application.Resources>
 </Application>

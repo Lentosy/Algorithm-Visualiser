@@ -6,13 +6,16 @@
         xmlns:local="clr-namespace:AlgorithmsVisualiser"
         mc:Ignorable="d"
         Title="MainWindow" Height="699" Width="950">
-    <Grid>
+    <Grid Background="snow">
         <StackPanel Margin="0,0,297,624"
                     Orientation="Horizontal">
-            <Label>Array accesses:</Label>
-            <Label Name="LabelArrayAccesses">0</Label>
-            <Label>Swaps:</Label>
-            <Label Name="LabelSwaps">0</Label>
+            
+            <Label Content="Array accesses:"/>
+            <Label Name="LabelArrayAccesses"
+                   Content="0"/>
+            
+            <Label Content="Swaps:"/>
+            <Label Name="LabelSwaps" Content="0"/>
         </StackPanel>
         <StackPanel Name="listContainer" 
                     Orientation="Horizontal"
@@ -27,20 +30,18 @@
                     Margin="645,0,0,0">
 
             <ComboBox Name="ComboBoxSortingAlgorithms"
-                      SelectionChanged="ComboBoxSortingAlgorithms_SelectionChanged">
-
-            </ComboBox>
+                      SelectionChanged="ComboBoxSortingAlgorithms_SelectionChanged" />
             <Button Name="ButtonStartSort"
-                    Click="ButtonStartSort_Click">Start sorting</Button>
-            <Line Margin="10"></Line>
+                    Content="Start sorting"
+                    Click="ButtonStartSort_Click"/>
+            <Line Margin="10" />
 
-            <ComboBox Name="ComboBoxListOrder">
-
-            </ComboBox>
+            <ComboBox Name="ComboBoxListOrder" />
 
             <StackPanel Orientation="Horizontal">
-                <Label>Elements:</Label>
-                <Label Name="LabelElementCount">50</Label>
+                <Label Content="Elements:"/>
+                <Label Name="LabelElementCount"
+                       Content="50"/>
             </StackPanel>
             <Slider Name="SliderElementCount"
                         ValueChanged="SliderElementCount_ValueChanged"
@@ -49,14 +50,16 @@
                         Value="50" Height="18" Margin="10,0"/>
 
             <Button Name="ButtonGenerateList"
-                    Click="ButtonGenerateList_Click">Generate list</Button>
+                    Click="ButtonGenerateList_Click"
+                    Content="Generate List"/>
 
-            <Line Margin="10"></Line>
+            <Line Margin="10" />
 
             <StackPanel Orientation="Horizontal">
-                <Label>Delay:</Label>
-                <Label Name="LabelSpeed">10</Label>
-                <Label>ms</Label>
+                <Label Content="Delay:"/>
+                <Label Name="LabelSpeed"
+                       Content="Content"/>
+                <Label Content="ms"/>
             </StackPanel>
             <Slider Name="SliderSpeed"
                         ValueChanged="SliderSpeed_ValueChanged"
