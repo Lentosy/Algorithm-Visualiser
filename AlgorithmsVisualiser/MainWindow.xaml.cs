@@ -1,5 +1,6 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using AlgorithmsVisualiser.Sorting;
+using AlgorithmsVisualiser.Sorting.Filling;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,17 +17,14 @@ namespace AlgorithmsVisualiser
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Attributes
         /// <summary>
         /// The to be sorted list
         /// </summary>
-        private List<int> list = new List<int>();
-
-        /// <summary>
-        /// Delay in milliseconds
-        /// </summary>
-        private int msDelay = 10;
+        private SortList list = new SortList();
 
         private SortAlgorithm currentSortAlgorithm;
+        #endregion
 
         public MainWindow()
         {
@@ -36,10 +34,11 @@ namespace AlgorithmsVisualiser
             InitializeSortingAlgorithms();
             InitializeListOrders();
 
-            FillListInAscendingOrder(list);
+            list.Fill(new AscendingFillStrategy(), 50);
             currentSortAlgorithm.InitializeContainer(list);
         }
 
+        #region Private methods
         private void InitializeSortingAlgorithms()
         {
             ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem()
@@ -49,8 +48,14 @@ namespace AlgorithmsVisualiser
                 IsSelected = true
             });
 
+            ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem()
+            {
+                Tag = ESortingAlgorithm.SELECTION_SORT,
+                Content = "Selection Sort",
+            });
+
             currentSortAlgorithm = new InsertionSort(listContainer);
-       }
+        }
 
         private void InitializeListOrders()
         {
@@ -70,51 +75,20 @@ namespace AlgorithmsVisualiser
                 Tag = EOrder.RANDOM,
                 Content = "Random"
             });
-        }
-
-
-        /// <summary>
-        /// Fills the list with elements in random order (64, 1, ..., 9, ...)
-        /// </summary>
-        /// <param name="list">The list to fill</param>
-        /// <param name="elementCount">The amount of elements to fill</param>
-        /// <param name="minValue">The minimum value of the random range</param>
-        /// <param name="maxValue">The maximum value of the random range</param>
-        private void FillListWithRandomValues(List<int> list, int elementCount = 50, int minValue = 1, int maxValue = 100)
-        {
-            Random random = new Random();
-            for (int i = 0; i < elementCount; i++)
+            ComboBoxListOrder.Items.Add(new ComboBoxItem
             {
-                list.Add(random.Next(minValue, maxValue));
-            }
-        }
-
-        /// <summary>
-        /// Fills the list with elements in ascending order (1, 2, ..., 100)
-        /// </summary>
-        /// <param name="list">The list to fill</param>
-        /// <param name="elementCount">The amount of elements to fill</param>
-        private void FillListInAscendingOrder(List<int> list, int elementCount = 50)
-        {
-            for (int i = 0; i < elementCount; i++)
+                Tag = EOrder.CONCAVE,
+                Content = "Concave"
+            });
+            ComboBoxListOrder.Items.Add(new ComboBoxItem
             {
-                list.Add(i + 1);
-            }
+                Tag = EOrder.CONVEX,
+                Content = "Convex"
+            });
         }
+        #endregion
 
-        /// <summary>
-        /// Fills the list with numbers in descending order (100, 99, ..., 1)
-        /// </summary>
-        /// <param name="list">The list to fill</param>
-        /// <param name="elementCount">The amount of elements to fill</param>
-        private void FillListInDescendingOrder(List<int> list, int elementCount = 50)
-        {
-            for (int i = elementCount; i > 0; i--)
-            {
-                list.Add(i);
-            }
-        }
-
+        #region Events
         /// <summary>
         /// Starts the sorting process
         /// </summary>
@@ -136,22 +110,32 @@ namespace AlgorithmsVisualiser
             int elementCount = (int)SliderElementCount.Value;
 
             list.Clear();
+
+            IFillStrategy fillStrategy;
             switch (cItem.Tag)
             {
                 case EOrder.ASCENDING:
-                    FillListInAscendingOrder(list, elementCount);
+                    fillStrategy = new AscendingFillStrategy();
                     break;
                 case EOrder.DESCENDING:
-                    FillListInDescendingOrder(list, elementCount);
+                    fillStrategy = new DescendingFillStrategy();
                     break;
                 case EOrder.RANDOM:
-                    FillListWithRandomValues(list, elementCount);
+                    fillStrategy = new RandomFillStrategy();
+                    break;
+                case EOrder.CONCAVE:
+                    fillStrategy = new ConcaveFillStrategy();
+                    break;
+                case EOrder.CONVEX:
+                    fillStrategy = new ConvexFillStrategy();
+                    break;
+                default:
+                    fillStrategy = new AscendingFillStrategy();
                     break;
             }
+            list.Fill(fillStrategy, elementCount);
             currentSortAlgorithm.InitializeContainer(list);
         }
-
-
 
         private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -163,6 +147,11 @@ namespace AlgorithmsVisualiser
         {
             msDelay = (int)SliderSpeed.Value;
             LabelSpeed.Content = msDelay;
+            if(currentSortAlgorithm != null)
+            {
+                currentSortAlgorithm.Delay = msDelay;
+            }
+
         }
 
         private void ComboBoxSortingAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,8 +161,12 @@ namespace AlgorithmsVisualiser
                 case ESortingAlgorithm.INSERTION_SORT:
                     currentSortAlgorithm = new InsertionSort(listContainer);
                     break;
+                case ESortingAlgorithm.SELECTION_SORT:
+                    currentSortAlgorithm = new SelectionSort(listContainer);
+                    break;
             }
 
         }
+        #endregion
     }
 }

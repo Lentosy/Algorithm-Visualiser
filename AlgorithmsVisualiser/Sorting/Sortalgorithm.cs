@@ -1,12 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using AlgorithmsVisualiser.Helpers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AlgorithmsVisualiser.Sorting
 {
     public abstract class SortAlgorithm
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="listContainer">The container that holds the visual list</param>
+        protected SortAlgorithm(StackPanel listContainer, int delay = 10)
+        {
+            this.listContainer = listContainer;
+            Delay = delay;
+        }
+
+        #region Attributes
         /// <summary>
         /// The height that the value '1' should take. 
         /// Example: If the value of a listitem is 14, the height will be 14 * unitHeight
@@ -18,12 +31,15 @@ namespace AlgorithmsVisualiser.Sorting
         /// </summary>
         protected double unitWidth;
 
-        protected StackPanel listContainer;
-        protected SortAlgorithm(StackPanel listContainer)
-        {
-            this.listContainer = listContainer;
-        }
+        /// <summary>
+        /// The delay for each significant operation in milliseconds
+        /// </summary>
+        public int Delay { get; set; }
 
+        protected StackPanel listContainer;
+        #endregion
+
+        #region Public Methods
         /// <summary>
         /// This method sorts the list supplied as the only parameter. Time complexity depends on the sorting
         /// algorithm that is used as the concrete implementation.
@@ -41,7 +57,7 @@ namespace AlgorithmsVisualiser.Sorting
         /// This method will intiliaze the default GUI before sorting the list.
         /// </summary>
         /// <param name="list"></param>
-        public void  InitializeContainer(IList<int> list)
+        public void InitializeContainer(IList<int> list)
         {
             unitHeight = listContainer.Height / list.Max();
             unitWidth = listContainer.Width / list.Count;
@@ -58,6 +74,20 @@ namespace AlgorithmsVisualiser.Sorting
                 listContainer.Children.Add(listItem);
             }
         }
+        #endregion
+
+        #region Protected methods
+        protected void SelectElement(int indexToSelect)
+        {
+            ((Label)listContainer.Children[indexToSelect]).Background = new SolidColorBrush(Colours.Red);
+        }
+
+        protected void CompareElement(int indexToCompare)
+        {
+            ((Label)listContainer.Children[indexToCompare]).Background = new SolidColorBrush(Colours.Green);
+        }
+
+
 
         /// <summary>
         /// This method gets called everytime the sorting algorithm swaps an element
@@ -78,6 +108,7 @@ namespace AlgorithmsVisualiser.Sorting
                 listContainer.Children.Add(listItem);
             }
         }
+        #endregion 
 
     }
 }

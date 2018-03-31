@@ -7,6 +7,8 @@
     {
         ASCENDING,
         DESCENDING,
-        RANDOM
+        RANDOM,
+        CONCAVE,
+        CONVEX
     }
 }

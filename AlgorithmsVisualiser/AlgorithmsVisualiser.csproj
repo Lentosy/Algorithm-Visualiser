@@ -57,8 +57,16 @@
     <Compile Include="Helpers\Colours.cs" />
     <Compile Include="Helpers\EOrder.cs" />
     <Compile Include="Helpers\ESortingAlgorithm.cs" />
+    <Compile Include="Sorting\Filling\AscendingFillStrategy.cs" />
+    <Compile Include="Sorting\Filling\ConcaveFillStrategy.cs" />
+    <Compile Include="Sorting\Filling\ConvexFillStrategy.cs" />
+    <Compile Include="Sorting\Filling\DescendingFillStrategy.cs" />
+    <Compile Include="Sorting\Filling\IFillStrategy.cs" />
+    <Compile Include="Sorting\Filling\RandomFillStrategy.cs" />
     <Compile Include="Sorting\InsertionSort.cs" />
-    <Compile Include="Sorting\SortingAlgorithm.cs" />
+    <Compile Include="Sorting\SelectionSort.cs" />
+    <Compile Include="Sorting\Sortalgorithm.cs" />
+    <Compile Include="Sorting\SortList.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

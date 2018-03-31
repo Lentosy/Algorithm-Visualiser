@@ -1,8 +1,7 @@
-﻿using AlgorithmsVisualiser.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Media;
+
 
 namespace AlgorithmsVisualiser.Sorting
 {
@@ -10,20 +9,21 @@ namespace AlgorithmsVisualiser.Sorting
     {
         public InsertionSort(StackPanel listContainer) : base(listContainer) { }
 
+        public override string Name => "Insertion Sort";
+        
         public async override void Sort(IList<int> list)
         {
-            UpdateContainer(list);
             for (int i = 1; i < list.Count; i++)
             {
                 int h = list[i];
                 SelectElement(i);
-                await Task.Delay(10);
+                await Task.Delay(Delay);
 
                 int j = i - 1;
                 while (j >= 0 && h < list[j])
                 {
                     CompareElement(j);
-                    await Task.Delay(10);
+                    await Task.Delay(Delay);
                     list[j + 1] = list[j];
                     j--;
                 }
@@ -31,31 +31,5 @@ namespace AlgorithmsVisualiser.Sorting
                 UpdateContainer(list);
             }
         }
-
-        public override string Name {
-            get {
-                return "Insertion Sort";
-            }
-        }
-
-        /// <summary>
-        /// Sets the current 
-        /// </summary>
-        /// <param name="indexToSelect"></param>
-        private void SelectElement(int indexToSelect)
-        {
-            ((Label)listContainer.Children[indexToSelect]).Background = new SolidColorBrush(Colours.Red);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="indexToCompare"></param>
-        private void CompareElement(int indexToCompare)
-        {
-            ((Label)listContainer.Children[indexToCompare]).Background = new SolidColorBrush(Colours.Green);
-        }
-
-
     }
 }

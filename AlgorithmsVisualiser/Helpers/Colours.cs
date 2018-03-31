@@ -19,5 +19,11 @@ namespace AlgorithmsVisualiser.Helpers
                 return Color.FromArgb(255, 0, 255, 0);
             }
         }
+
+        public static Color Blue {
+            get {
+                return Color.FromArgb(255, 0, 0, 255);
+            }
+        }
     }
 }

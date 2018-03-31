@@ -5,6 +5,7 @@
     /// </summary>
     public enum ESortingAlgorithm
     {
-        INSERTION_SORT
+        INSERTION_SORT,
+        SELECTION_SORT
     }
 }
