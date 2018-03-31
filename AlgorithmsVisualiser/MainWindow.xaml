@@ -5,15 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AlgorithmsVisualiser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="699" Width="950">
     <Grid>
         <StackPanel Name="listContainer" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Left" 
-                    Height="399" 
-                    Margin="10,10,0,0" 
+                    Height="648" 
+                    Margin="0,10,0,0" 
                     VerticalAlignment="Top" 
-                    Width="772">
+                    Width="640">
+        </StackPanel>
+        <StackPanel Name="menuContainer"
+                    Orientation="Vertical"
+                    Margin="645,10,10,10">
+
+            <ComboBox>
+                <ComboBoxItem IsSelected="True">Insertion Sort</ComboBoxItem>
+            </ComboBox>
+            <Button Name="ButtonStartSort"
+                    Click="ButtonStartSort_Click">Start sorting</Button>
+            <Line Margin="10"></Line>
+            
+            <ComboBox Name="ComboBoxListOrder">
+                <ComboBoxItem Tag="ASC" IsSelected="True">Ascending Order</ComboBoxItem>
+                <ComboBoxItem Tag="DESC">Descending Order</ComboBoxItem>
+                <ComboBoxItem Tag="RAND">Random Order</ComboBoxItem>
+            </ComboBox>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label>Elements:</Label>
+                <Slider Name="SliderElementCount"
+                        Minimum="1" 
+                        Maximum="1000" 
+                        Value="50"
+                        Width="154" Height="18"></Slider>
+                <Label Name="LabelElementCount">50</Label>
+            </StackPanel>
+
+            <Button Name="ButtonGenerateList"
+                    Click="ButtonGenerateList_Click">Generate list</Button>
+            <StackPanel Orientation="Horizontal">
+                <Label>Speed:</Label>
+                <Slider Name="SliderSpeed"
+                        Minimum="1"
+                        Maximum="100" 
+                        Width="162" 
+                        Height="18"
+                        ValueChanged="SliderSpeed_ValueChanged"></Slider>
+                <Label Name="LabelSpeed"></Label>
+                <Label>ms</Label>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

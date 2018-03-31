@@ -1,14 +1,12 @@
 ﻿using AlgorithmsVisualiser.Helpers;
-using AlgorithmsVisualiser.Sorting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace AlgorithmsVisualiser
 {
@@ -33,37 +31,23 @@ namespace AlgorithmsVisualiser
         /// </summary>
         private double unitWidth;
 
+        /// <summary>
+        /// Delay in milliseconds
+        /// </summary>
+        private int msDelay = 10;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            // add random values
-            {
-                list.Add(10);
-                list.Add(5);
-                list.Add(7);
-                list.Add(6);
-                list.Add(1);
-                list.Add(3);
-                list.Add(17);
-                list.Add(9);
-                list.Add(15);
-                list.Add(30);
-                list.Add(20);
-            }
-
-            unitHeight = listContainer.Height / list.Max();
-            unitWidth  = listContainer.Width / list.Count;
-
-            UpdateContainer(list);
-            InsertionSort(list);
-            UpdateContainer(list);
+            SliderSpeed.Value = msDelay;
+            LabelSpeed.Content = msDelay;
         }
-
-
 
         void UpdateContainer(IList<int> list)
         {
+            unitHeight = listContainer.Height / list.Max();
+            unitWidth = listContainer.Width / list.Count;
             listContainer.Children.Clear();
             foreach (int i in list)
             {
@@ -72,7 +56,6 @@ namespace AlgorithmsVisualiser
                     Background = SystemColors.ActiveBorderBrush,
                     // Margin and not height so the label starts from bottom
                     Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
-                    Content = i,
                     Width = unitWidth
                 };
                 listContainer.Children.Add(listItem);
@@ -91,46 +74,92 @@ namespace AlgorithmsVisualiser
 
         private async void InsertionSort(IList<int> list)
         {
-            await Task.Delay(5000);
             for (int i = 1; i < list.Count; i++)
             {
-                UpdateContainer(list);
                 int h = list[i];
-                await Task.Delay(1000);
                 SelectElement(i);
+                await Task.Delay(msDelay);
 
                 int j = i - 1;
-                while(j >= 0 && h < list[j])
+                while (j >= 0 && h < list[j])
                 {
                     CompareElement(j);
-                    await Task.Delay(1000);
+                    await Task.Delay(msDelay);
                     list[j + 1] = list[j];
                     j--;
                 }
                 list[j + 1] = h;
-            }   
-        }
-
-        private void FillListInAscendingOrder(List<int> l)
-        {
-            for (int i = 0; i < listContainer.Width; i++)
-            {
-                l.Add(i);
+                UpdateContainer(list);
             }
         }
-        
+
+        private void FillListWithRandomValues(List<int> list, int elementCount = 50, int minValue = 1, int maxValue = 100)
+        {
+            Random random = new Random();
+            for (int i = 0; i < elementCount; i++)
+            {
+                list.Add(random.Next(minValue, maxValue));
+            }
+        }
+
+        private void FillListInAscendingOrder(List<int> list, int elementCount = 50)
+        {
+            for (int i = 0; i < elementCount; i++)
+            {
+                list.Add(i + 1);
+            }
+        }
+
+        private void FillListInDescendingOrder(List<int> list, int elementCount = 50)
+        {
+            for (int i = elementCount; i > 0; i--)
+            {
+                list.Add(i);
+            }
+        }
+
+        /// <summary>
+        /// Starts the sorting process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonStartSort_Click(object sender, RoutedEventArgs e)
+        {
+            InsertionSort(list);
+        }
+
+        /// <summary>
+        /// Generates a list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonGenerateList_Click(object sender, RoutedEventArgs e)
+        {
+
+            ComboBoxItem cItem = (ComboBoxItem)ComboBoxListOrder.SelectedItem;
+            int elementCount = (int)SliderElementCount.Value;
+
+            list.Clear();
+            switch (cItem.Tag)
+            {
+                case "ASC":
+                    FillListInAscendingOrder(list, elementCount);
+                    break;
+                case "DESC":
+                    FillListInDescendingOrder(list, elementCount);
+                    break;
+                case "RAND":
+                    FillListWithRandomValues(list, elementCount);
+                    break;
+            }
+            UpdateContainer(list);
+
+        }
+
+        private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            msDelay = (int)SliderSpeed.Value;
+            LabelSpeed.Content = msDelay;
+        }
     }
 }
-
-
-
-/*
- * OPERATIONS:
- *  ACCESS AN ELEMENT
- *  COMPARE AN ELEMENT WITH AN OTHER ELEMENT
- *  SWAP AN ELEMENT WITH ANOTHER ELEMENT
- *  
- * 
- * 
- * 
- */ 
