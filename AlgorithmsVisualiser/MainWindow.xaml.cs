@@ -26,9 +26,50 @@ namespace AlgorithmsVisualiser
         /// </summary>
         private int msDelay = 10;
 
+        private SortAlgorithm currentSortAlgorithm;
+
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
+
+            InitializeSortingAlgorithms();
+            InitializeListOrders();
+
+            FillListInAscendingOrder(list);
+            currentSortAlgorithm.InitializeContainer(list);
+        }
+
+        private void InitializeSortingAlgorithms()
+        {
+            ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem()
+            {
+                Tag = ESortingAlgorithm.INSERTION_SORT,
+                Content = "Insertion Sort",
+                IsSelected = true
+            });
+
+            currentSortAlgorithm = new InsertionSort(listContainer);
+       }
+
+        private void InitializeListOrders()
+        {
+            ComboBoxListOrder.Items.Add(new ComboBoxItem
+            {
+                Tag = EOrder.ASCENDING,
+                Content = "Ascending",
+                IsSelected = true
+            });
+            ComboBoxListOrder.Items.Add(new ComboBoxItem
+            {
+                Tag = EOrder.DESCENDING,
+                Content = "Descending"
+            });
+            ComboBoxListOrder.Items.Add(new ComboBoxItem
+            {
+                Tag = EOrder.RANDOM,
+                Content = "Random"
+            });
         }
 
 
@@ -81,9 +122,7 @@ namespace AlgorithmsVisualiser
         /// <param name="e"></param>
         private void ButtonStartSort_Click(object sender, RoutedEventArgs e)
         {
-            SortAlgorithm sortmethod = new InsertionSort(listContainer);
-            FillListWithRandomValues(list);
-            sortmethod.Sort(list);
+            currentSortAlgorithm.Sort(list);
         }
 
         /// <summary>
@@ -93,24 +132,26 @@ namespace AlgorithmsVisualiser
         /// <param name="e"></param>
         private void ButtonGenerateList_Click(object sender, RoutedEventArgs e)
         {
-
             ComboBoxItem cItem = (ComboBoxItem)ComboBoxListOrder.SelectedItem;
             int elementCount = (int)SliderElementCount.Value;
 
             list.Clear();
             switch (cItem.Tag)
             {
-                case "ASC":
+                case EOrder.ASCENDING:
                     FillListInAscendingOrder(list, elementCount);
                     break;
-                case "DESC":
+                case EOrder.DESCENDING:
                     FillListInDescendingOrder(list, elementCount);
                     break;
-                case "RAND":
+                case EOrder.RANDOM:
                     FillListWithRandomValues(list, elementCount);
                     break;
             }
+            currentSortAlgorithm.InitializeContainer(list);
         }
+
+
 
         private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -124,6 +165,15 @@ namespace AlgorithmsVisualiser
             LabelSpeed.Content = msDelay;
         }
 
+        private void ComboBoxSortingAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cItem = (ComboBoxItem)ComboBoxSortingAlgorithms.SelectedItem;
+            switch (cItem.Tag) {
+                case ESortingAlgorithm.INSERTION_SORT:
+                    currentSortAlgorithm = new InsertionSort(listContainer);
+                    break;
+            }
 
+        }
     }
 }

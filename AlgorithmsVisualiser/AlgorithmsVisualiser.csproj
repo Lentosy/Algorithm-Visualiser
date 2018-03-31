@@ -55,8 +55,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Colours.cs" />
+    <Compile Include="Helpers\EOrder.cs" />
+    <Compile Include="Helpers\ESortingAlgorithm.cs" />
     <Compile Include="Sorting\InsertionSort.cs" />
-    <Compile Include="Sorting\Sortmethod.cs" />
+    <Compile Include="Sorting\SortingAlgorithm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

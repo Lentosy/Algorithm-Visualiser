@@ -19,8 +19,9 @@
                     Orientation="Vertical"
                     Margin="645,10,10,10">
 
-            <ComboBox>
-                <ComboBoxItem IsSelected="True">Insertion Sort</ComboBoxItem>
+            <ComboBox Name="ComboBoxSortingAlgorithms"
+                      SelectionChanged="ComboBoxSortingAlgorithms_SelectionChanged">
+
             </ComboBox>
             <Button Name="ButtonStartSort"
                     Click="ButtonStartSort_Click">Start sorting</Button>
@@ -28,9 +29,7 @@
             <Line Margin="10"></Line>
 
             <ComboBox Name="ComboBoxListOrder">
-                <ComboBoxItem Tag="ASC" IsSelected="True">Ascending Order</ComboBoxItem>
-                <ComboBoxItem Tag="DESC">Descending Order</ComboBoxItem>
-                <ComboBoxItem Tag="RAND">Random Order</ComboBoxItem>
+
             </ComboBox>
 
             <StackPanel Orientation="Horizontal">

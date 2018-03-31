@@ -38,11 +38,19 @@ namespace AlgorithmsVisualiser.Sorting
             }
         }
 
+        /// <summary>
+        /// Sets the current 
+        /// </summary>
+        /// <param name="indexToSelect"></param>
         private void SelectElement(int indexToSelect)
         {
             ((Label)listContainer.Children[indexToSelect]).Background = new SolidColorBrush(Colours.Red);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="indexToCompare"></param>
         private void CompareElement(int indexToCompare)
         {
             ((Label)listContainer.Children[indexToCompare]).Background = new SolidColorBrush(Colours.Green);
