@@ -21,8 +21,6 @@ namespace AlgorithmsVisualiser
         /// </summary>
         private List<int> list = new List<int>();
 
-
-
         /// <summary>
         /// Delay in milliseconds
         /// </summary>
@@ -30,9 +28,7 @@ namespace AlgorithmsVisualiser
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
 

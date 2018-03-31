@@ -49,7 +49,7 @@
             <Line Margin="10"></Line>
 
             <StackPanel Orientation="Horizontal">
-                <Label>Speed:</Label>
+                <Label>Delay:</Label>
                 <Label Name="LabelSpeed">10</Label>
                 <Label>ms</Label>
             </StackPanel>
