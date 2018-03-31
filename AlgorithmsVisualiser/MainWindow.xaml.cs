@@ -1,15 +1,11 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using AlgorithmsVisualiser.Sorting;
+using AlgorithmsVisualiser.Sorting.Algorithms;
 using AlgorithmsVisualiser.Sorting.Filling;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace AlgorithmsVisualiser
 {
@@ -141,6 +137,9 @@ namespace AlgorithmsVisualiser
                     break;
                 case ESortingAlgorithm.SELECTION_SORT:
                     currentSortAlgorithm = new SelectionSort(listContainer);
+                    break;
+                case ESortingAlgorithm.BOGO_SORT:
+                    currentSortAlgorithm = new BogoSort(listContainer);
                     break;
             }
 

@@ -6,6 +6,7 @@
     public enum ESortingAlgorithm
     {
         INSERTION_SORT,
-        SELECTION_SORT
+        SELECTION_SORT,
+        BOGO_SORT
     }
 }

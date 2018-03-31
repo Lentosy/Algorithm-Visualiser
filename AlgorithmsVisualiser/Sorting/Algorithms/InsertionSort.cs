@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 
 
-namespace AlgorithmsVisualiser.Sorting
+namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
     public class InsertionSort : SortAlgorithm
     {

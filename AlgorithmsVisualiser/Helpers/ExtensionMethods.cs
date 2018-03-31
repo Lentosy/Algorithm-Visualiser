@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AlgorithmsVisualiser.Helpers
 {
@@ -30,6 +32,23 @@ namespace AlgorithmsVisualiser.Helpers
                 sb.Append(c[i]);
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Fisher-Yates shuffle
+        /// </summary>
+        public static void Shuffle(this IList<int> list)
+        {
+            Random random = new Random();
+            int n = list.Count;
+            while(n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                int value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }
