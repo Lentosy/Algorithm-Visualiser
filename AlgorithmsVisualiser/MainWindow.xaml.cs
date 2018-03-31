@@ -39,9 +39,6 @@ namespace AlgorithmsVisualiser
         public MainWindow()
         {
             InitializeComponent();
-
-            SliderSpeed.Value = msDelay;
-            LabelSpeed.Content = msDelay;
         }
 
         void UpdateContainer(IList<int> list)
@@ -62,16 +59,20 @@ namespace AlgorithmsVisualiser
             }
         }
 
-        void SelectElement(int indexToSelect)
+        private void SelectElement(int indexToSelect)
         {
             ((Label)listContainer.Children[indexToSelect]).Background = new SolidColorBrush(Colours.Red);
         }
 
-        void CompareElement(int indexToCompare)
+        private void CompareElement(int indexToCompare)
         {
             ((Label)listContainer.Children[indexToCompare]).Background = new SolidColorBrush(Colours.Green);
         }
 
+        /// <summary>
+        /// Performs insertion sort. This method should go to its own class
+        /// </summary>
+        /// <param name="list">The list to perform insertion sort on</param>
         private async void InsertionSort(IList<int> list)
         {
             for (int i = 1; i < list.Count; i++)
@@ -93,6 +94,13 @@ namespace AlgorithmsVisualiser
             }
         }
 
+        /// <summary>
+        /// Fills the list with elements in random order (64, 1, ..., 9, ...)
+        /// </summary>
+        /// <param name="list">The list to fill</param>
+        /// <param name="elementCount">The amount of elements to fill</param>
+        /// <param name="minValue">The minimum value of the random range</param>
+        /// <param name="maxValue">The maximum value of the random range</param>
         private void FillListWithRandomValues(List<int> list, int elementCount = 50, int minValue = 1, int maxValue = 100)
         {
             Random random = new Random();
@@ -102,6 +110,11 @@ namespace AlgorithmsVisualiser
             }
         }
 
+        /// <summary>
+        /// Fills the list with elements in ascending order (1, 2, ..., 100)
+        /// </summary>
+        /// <param name="list">The list to fill</param>
+        /// <param name="elementCount">The amount of elements to fill</param>
         private void FillListInAscendingOrder(List<int> list, int elementCount = 50)
         {
             for (int i = 0; i < elementCount; i++)
@@ -110,6 +123,11 @@ namespace AlgorithmsVisualiser
             }
         }
 
+        /// <summary>
+        /// Fills the list with numbers in descending order (100, 99, ..., 1)
+        /// </summary>
+        /// <param name="list">The list to fill</param>
+        /// <param name="elementCount">The amount of elements to fill</param>
         private void FillListInDescendingOrder(List<int> list, int elementCount = 50)
         {
             for (int i = elementCount; i > 0; i--)
@@ -153,13 +171,20 @@ namespace AlgorithmsVisualiser
                     break;
             }
             UpdateContainer(list);
-
         }
+
+        private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            LabelElementCount.Content = (int)SliderElementCount.Value;
+        }
+        
 
         private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             msDelay = (int)SliderSpeed.Value;
             LabelSpeed.Content = msDelay;
         }
+
+
     }
 }

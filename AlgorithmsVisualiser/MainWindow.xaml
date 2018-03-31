@@ -24,37 +24,41 @@
             </ComboBox>
             <Button Name="ButtonStartSort"
                     Click="ButtonStartSort_Click">Start sorting</Button>
+
             <Line Margin="10"></Line>
-            
+
             <ComboBox Name="ComboBoxListOrder">
                 <ComboBoxItem Tag="ASC" IsSelected="True">Ascending Order</ComboBoxItem>
                 <ComboBoxItem Tag="DESC">Descending Order</ComboBoxItem>
                 <ComboBoxItem Tag="RAND">Random Order</ComboBoxItem>
             </ComboBox>
-            
+
             <StackPanel Orientation="Horizontal">
                 <Label>Elements:</Label>
-                <Slider Name="SliderElementCount"
-                        Minimum="1" 
-                        Maximum="1000" 
-                        Value="50"
-                        Width="154" Height="18"></Slider>
                 <Label Name="LabelElementCount">50</Label>
             </StackPanel>
+            <Slider Name="SliderElementCount"
+                        ValueChanged="SliderElementCount_ValueChanged"
+                        Minimum="1" 
+                        Maximum="1000" 
+                        Value="50" Height="18" Margin="10,0"/>
 
             <Button Name="ButtonGenerateList"
                     Click="ButtonGenerateList_Click">Generate list</Button>
+
+            <Line Margin="10"></Line>
+
             <StackPanel Orientation="Horizontal">
                 <Label>Speed:</Label>
-                <Slider Name="SliderSpeed"
-                        Minimum="1"
-                        Maximum="100" 
-                        Width="162" 
-                        Height="18"
-                        ValueChanged="SliderSpeed_ValueChanged"></Slider>
-                <Label Name="LabelSpeed"></Label>
+                <Label Name="LabelSpeed">10</Label>
                 <Label>ms</Label>
             </StackPanel>
+            <Slider Name="SliderSpeed"
+                        ValueChanged="SliderSpeed_ValueChanged"
+                        Minimum="1"
+                        Maximum="100" 
+                        Value="10" 
+                        Height="18" Margin="10,0"/>
         </StackPanel>
 
     </Grid>
