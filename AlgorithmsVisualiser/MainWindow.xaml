@@ -7,17 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="699" Width="950">
     <Grid>
+        <StackPanel Margin="0,0,297,624"
+                    Orientation="Horizontal">
+            <Label>Array accesses:</Label>
+            <Label Name="LabelArrayAccesses">0</Label>
+            <Label>Swaps:</Label>
+            <Label Name="LabelSwaps">0</Label>
+        </StackPanel>
         <StackPanel Name="listContainer" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Left" 
-                    Height="648" 
-                    Margin="0,10,0,0" 
+                    Height="609" 
+                    Margin="10,49,0,0" 
                     VerticalAlignment="Top" 
-                    Width="640">
+                    Width="630">
         </StackPanel>
         <StackPanel Name="menuContainer"
                     Orientation="Vertical"
-                    Margin="645,10,10,10">
+                    Margin="645,0,0,0">
 
             <ComboBox Name="ComboBoxSortingAlgorithms"
                       SelectionChanged="ComboBoxSortingAlgorithms_SelectionChanged">
@@ -25,7 +32,6 @@
             </ComboBox>
             <Button Name="ButtonStartSort"
                     Click="ButtonStartSort_Click">Start sorting</Button>
-
             <Line Margin="10"></Line>
 
             <ComboBox Name="ComboBoxListOrder">

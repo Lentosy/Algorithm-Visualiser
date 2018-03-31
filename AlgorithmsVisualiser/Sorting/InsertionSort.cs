@@ -10,11 +10,12 @@ namespace AlgorithmsVisualiser.Sorting
         public InsertionSort(StackPanel listContainer) : base(listContainer) { }
 
         public override string Name => "Insertion Sort";
-        
+
         public async override void Sort(IList<int> list)
         {
             for (int i = 1; i < list.Count; i++)
             {
+
                 int h = list[i];
                 SelectElement(i);
                 await Task.Delay(Delay);
@@ -30,6 +31,7 @@ namespace AlgorithmsVisualiser.Sorting
                 list[j + 1] = h;
                 UpdateContainer(list);
             }
+
         }
     }
 }

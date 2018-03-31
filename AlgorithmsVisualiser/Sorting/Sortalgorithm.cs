@@ -9,16 +9,6 @@ namespace AlgorithmsVisualiser.Sorting
 {
     public abstract class SortAlgorithm
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// <param name="listContainer">The container that holds the visual list</param>
-        protected SortAlgorithm(StackPanel listContainer, int delay = 10)
-        {
-            this.listContainer = listContainer;
-            Delay = delay;
-        }
-
         #region Attributes
         /// <summary>
         /// The height that the value '1' should take. 
@@ -38,6 +28,16 @@ namespace AlgorithmsVisualiser.Sorting
 
         protected StackPanel listContainer;
         #endregion
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="listContainer">The container that holds the visual list</param>
+        protected SortAlgorithm(StackPanel listContainer, int delay = 10)
+        {
+            this.listContainer = listContainer;
+            Delay = delay;
+        }
 
         #region Public Methods
         /// <summary>

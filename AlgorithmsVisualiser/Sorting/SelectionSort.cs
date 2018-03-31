@@ -8,6 +8,8 @@ namespace AlgorithmsVisualiser.Sorting
 {
     public class SelectionSort : SortAlgorithm
     {
+        private int previousMaxIndex;
+
         public SelectionSort(StackPanel listContainer) : base(listContainer) { }
 
         public override string Name => "Selection Sort";
@@ -18,7 +20,7 @@ namespace AlgorithmsVisualiser.Sorting
             {
                 int imax = i;
                 SelectElement(i);
-                await Task.Delay(10);
+                await Task.Delay(Delay);
 
                 for(int j = 0; j < i; j++)
                 {
@@ -27,9 +29,8 @@ namespace AlgorithmsVisualiser.Sorting
                     {
                         imax = j;
                         SelectMax(j);
-
                     }
-                    await Task.Delay(10);
+                    await Task.Delay(Delay);
                 }
 
                 int temp = list[i];
@@ -41,7 +42,9 @@ namespace AlgorithmsVisualiser.Sorting
 
         private void SelectMax(int index)
         {
+            ((Label)listContainer.Children[previousMaxIndex]).Background = new SolidColorBrush(Colours.Green);
             ((Label)listContainer.Children[index]).Background = new SolidColorBrush(Colours.Blue);
+            previousMaxIndex = index;
         }
     }
 }

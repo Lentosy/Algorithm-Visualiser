@@ -99,6 +99,7 @@ namespace AlgorithmsVisualiser
             currentSortAlgorithm.Sort(list);
         }
 
+
         /// <summary>
         /// Generates a list
         /// </summary>
@@ -145,13 +146,12 @@ namespace AlgorithmsVisualiser
 
         private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            msDelay = (int)SliderSpeed.Value;
+            int msDelay = (int)SliderSpeed.Value;
             LabelSpeed.Content = msDelay;
             if(currentSortAlgorithm != null)
             {
                 currentSortAlgorithm.Delay = msDelay;
             }
-
         }
 
         private void ComboBoxSortingAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -168,5 +168,7 @@ namespace AlgorithmsVisualiser
 
         }
         #endregion
+
+
     }
 }
