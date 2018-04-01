@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sorting="clr-namespace:AlgorithmsVisualiser.Sorting"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="950">
     <Grid Background="snow">
@@ -16,14 +17,14 @@
             <Label Content="Swaps:"/>
             <Label Name="LabelSwaps" Content="0"/>
         </StackPanel>
-        <StackPanel Name="listContainer" 
+        <sorting:SortView x:Name="listContainer" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Left" 
                     Height="609" 
                     Margin="10,49,0,0" 
                     VerticalAlignment="Top" 
                     Width="630">
-        </StackPanel>
+        </sorting:SortView>
         <StackPanel Name="menuContainer"
                     Orientation="Vertical"
                     Margin="645,0,0,0">

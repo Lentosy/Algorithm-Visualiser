@@ -1,7 +1,6 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -11,7 +10,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
     {
         private int previousMaxIndex;
 
-        public SelectionSort(StackPanel listContainer) : base(listContainer) { }
+        public SelectionSort(SortView sortView) : base(sortView) { }
 
         public override string Name => "Selection Sort";
 
@@ -42,8 +41,8 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         private void SelectMax(int index)
         {
-            ((Rectangle)listContainer.Children[previousMaxIndex]).Fill = new SolidColorBrush(Colours.Green);
-            ((Rectangle)listContainer.Children[index]).Fill = new SolidColorBrush(Colours.Blue);
+            ((Rectangle)sortView.Children[previousMaxIndex]).Fill = new SolidColorBrush(Colours.Green);
+            ((Rectangle)sortView.Children[index]).Fill = new SolidColorBrush(Colours.Blue);
             previousMaxIndex = index;
         }
     }

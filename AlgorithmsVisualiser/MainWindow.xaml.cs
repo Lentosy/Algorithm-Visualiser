@@ -143,6 +143,9 @@ namespace AlgorithmsVisualiser
                 case ESortingAlgorithm.SELECTION_SORT:
                     currentSortAlgorithm = new SelectionSort(listContainer);
                     break;
+                case ESortingAlgorithm.COUNTING_SORT:
+                    currentSortAlgorithm = new CountingSort(listContainer);
+                    break;
                 case ESortingAlgorithm.BOGO_SORT:
                     currentSortAlgorithm = new BogoSort(listContainer);
                     break;

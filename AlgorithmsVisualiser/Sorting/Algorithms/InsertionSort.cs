@@ -11,7 +11,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
     public class InsertionSort : SortAlgorithm
     {
-        public InsertionSort(StackPanel listContainer) : base(listContainer) { }
+        public InsertionSort(SortView sortView) : base(sortView) { }
 
         public override string Name => "Insertion Sort";
 
@@ -22,7 +22,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
                 int h = list[i];
                 SelectElement(i);
-
+                await Task.Delay(Delay);
                 int j = i - 1;
                 while (j >= 0 && h < list[j])
                 {
@@ -45,9 +45,9 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         {
             for(int k = j; k <= i; k++)
             {
-                Rectangle rectangle = (Rectangle)listContainer.Children[k];
+                Rectangle rectangle = (Rectangle)sortView.Children[k];
                 rectangle.Fill = new SolidColorBrush(Colours.Default);
-                rectangle.Margin = new Thickness(0, listContainer.Height - (list[k] * unitHeight), 0, 0);
+                rectangle.Margin = new Thickness(0, sortView.Height - (list[k] * sortView.UnitHeight), 0, 0);
             }
         }
     }

@@ -7,6 +7,7 @@
     {
         INSERTION_SORT,
         SELECTION_SORT,
+        COUNTING_SORT,
         BOGO_SORT
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using AlgorithmsVisualiser.Helpers;
 
 namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
     public class BogoSort : SortAlgorithm
     {
-        public BogoSort(StackPanel listContainer) : base(listContainer) { }
+        public BogoSort(SortView sortView) : base(sortView) { }
 
         public override string Name => "Bogo Sort";
 

@@ -10,34 +10,23 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
     public abstract class SortAlgorithm
     {
-        #region Attributes
-        /// <summary>
-        /// The height that the value '1' should take. 
-        /// Example: If the value of a listitem is 14, the height will be 14 * unitHeight
-        /// </summary>
-        protected double unitHeight;
 
-        /// <summary>
-        /// The width that one bar representing a value should take
-        /// </summary>
-        protected double unitWidth;
 
         /// <summary>
         /// The delay for each significant operation in milliseconds
         /// </summary>
         public int Delay { get; set; }
 
-        protected StackPanel listContainer;
-        #endregion
+        protected SortView sortView;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="listContainer">The container that holds the visual list</param>
         /// <param name="delay">The default delay for each significant operation in milliseconds</param>
-        protected SortAlgorithm(StackPanel listContainer, int delay = 10)
+        protected SortAlgorithm(SortView listContainer, int delay = 10)
         {
-            this.listContainer = listContainer;
+            sortView = listContainer;
             Delay = delay;
         }
 
@@ -61,33 +50,19 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// <param name="list"></param>
         public void InitializeContainer(IList<int> list)
         {
-            unitHeight = listContainer.Height / list.Max();
-            unitWidth = listContainer.Width / list.Count;
-            listContainer.Children.Clear();
-            foreach (int i in list)
-            {
-                Rectangle listItem = new Rectangle
-                {
-                    Fill = new SolidColorBrush(Colours.Default),
-                    // Margin and not height so the label starts from bottom
-                    // The next line sets the top margin for each label. 
-                    Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
-                    Width = unitWidth
-                };
-                listContainer.Children.Add(listItem);
-            }
+            sortView.InitializeView(list);
         }
         #endregion
 
         #region Protected methods
         protected void SelectElement(int indexToSelect)
         {
-            ((Rectangle)listContainer.Children[indexToSelect]).Fill = new SolidColorBrush(Colours.Red);
+            ((Rectangle)sortView.Children[indexToSelect]).Fill = new SolidColorBrush(Colours.Red);
         }
 
         protected void CompareElement(int indexToCompare)
         {
-            ((Rectangle)listContainer.Children[indexToCompare]).Fill = new SolidColorBrush(Colours.Green);
+            ((Rectangle)sortView.Children[indexToCompare]).Fill = new SolidColorBrush(Colours.Green);
         }
 
         /// <summary>
@@ -96,11 +71,11 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// <param name="list"></param>
         protected void UpdateContainer(IList<int> list)
         {
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                Rectangle rectangle = (Rectangle)listContainer.Children[i];
+                Rectangle rectangle = (Rectangle)sortView.Children[i];
                 rectangle.Fill = new SolidColorBrush(Colours.Default);
-                rectangle.Margin = new Thickness(0, listContainer.Height - (list[i] * unitHeight), 0, 0);
+                rectangle.Margin = new Thickness(0, sortView.Height - (list[i] * sortView.UnitHeight), 0, 0);
             }
         }
         #endregion 
