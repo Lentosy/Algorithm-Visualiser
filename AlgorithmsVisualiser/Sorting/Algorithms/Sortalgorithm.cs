@@ -63,7 +63,19 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         {
             unitHeight = listContainer.Height / list.Max();
             unitWidth = listContainer.Width / list.Count;
-            UpdateContainer(list);
+            listContainer.Children.Clear();
+            foreach (int i in list)
+            {
+                Rectangle listItem = new Rectangle
+                {
+                    Fill = new SolidColorBrush(Colours.Default),
+                    // Margin and not height so the label starts from bottom
+                    // The next line sets the top margin for each label. 
+                    Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
+                    Width = unitWidth
+                };
+                listContainer.Children.Add(listItem);
+            }
         }
         #endregion
 
@@ -79,23 +91,16 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         }
 
         /// <summary>
-        /// This method updates the container with the supplied list
+        /// This method updates the whole container with the list
         /// </summary>
         /// <param name="list"></param>
         protected void UpdateContainer(IList<int> list)
         {
-            listContainer.Children.Clear();
-            foreach (int i in list)
+            for(int i = 0; i < list.Count; i++)
             {
-                Rectangle listItem = new Rectangle
-                {
-                    Fill = new SolidColorBrush(Colours.Black),
-                    // Margin and not height so the label starts from bottom
-                    // The next line sets the top margin for each label. 
-                    Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
-                    Width = unitWidth
-                };
-                listContainer.Children.Add(listItem);
+                Rectangle rectangle = (Rectangle)listContainer.Children[i];
+                rectangle.Fill = new SolidColorBrush(Colours.Default);
+                rectangle.Margin = new Thickness(0, listContainer.Height - (list[i] * unitHeight), 0, 0);
             }
         }
         #endregion 

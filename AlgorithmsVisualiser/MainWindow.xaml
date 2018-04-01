@@ -62,7 +62,7 @@
             <Slider Name="SliderSpeed"
                         ValueChanged="SliderSpeed_ValueChanged"
                         Minimum="1"
-                        Maximum="100" 
+                        Maximum="500" 
                         Value="10" 
                         Height="18" Margin="10,0"/>
         </StackPanel>

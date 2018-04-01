@@ -8,7 +8,7 @@ namespace AlgorithmsVisualiser.Helpers
      */
     public class Colours
     {
-        public static Color Black {
+        public static Color Default {
             get {
                 return Color.FromArgb(255, 0, 0, 0);
             }

@@ -46,10 +46,9 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             for(int k = j; k <= i; k++)
             {
                 Rectangle rectangle = (Rectangle)listContainer.Children[k];
-                rectangle.Fill = new SolidColorBrush(Colours.Black);
+                rectangle.Fill = new SolidColorBrush(Colours.Default);
                 rectangle.Margin = new Thickness(0, listContainer.Height - (list[k] * unitHeight), 0, 0);
             }
-
         }
     }
 }
