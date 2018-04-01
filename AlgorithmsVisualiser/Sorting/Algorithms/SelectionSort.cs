@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
@@ -20,7 +21,6 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             {
                 int imax = i;
                 SelectElement(i);
-                await Task.Delay(Delay);
 
                 for(int j = 0; j < i; j++)
                 {
@@ -42,8 +42,8 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         private void SelectMax(int index)
         {
-            ((Label)listContainer.Children[previousMaxIndex]).Background = new SolidColorBrush(Colours.Green);
-            ((Label)listContainer.Children[index]).Background = new SolidColorBrush(Colours.Blue);
+            ((Rectangle)listContainer.Children[previousMaxIndex]).Fill = new SolidColorBrush(Colours.Green);
+            ((Rectangle)listContainer.Children[index]).Fill = new SolidColorBrush(Colours.Blue);
             previousMaxIndex = index;
         }
     }

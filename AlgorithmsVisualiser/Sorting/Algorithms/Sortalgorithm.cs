@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
@@ -33,6 +34,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// Default constructor
         /// </summary>
         /// <param name="listContainer">The container that holds the visual list</param>
+        /// <param name="delay">The default delay for each significant operation in milliseconds</param>
         protected SortAlgorithm(StackPanel listContainer, int delay = 10)
         {
             this.listContainer = listContainer;
@@ -61,36 +63,23 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         {
             unitHeight = listContainer.Height / list.Max();
             unitWidth = listContainer.Width / list.Count;
-            listContainer.Children.Clear();
-            foreach (int i in list)
-            {
-                Label listItem = new Label
-                {
-                    Background = SystemColors.ActiveBorderBrush,
-                    // Margin and not height so the label starts from bottom
-                    Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
-                    Width = unitWidth
-                };
-                listContainer.Children.Add(listItem);
-            }
+            UpdateContainer(list);
         }
         #endregion
 
         #region Protected methods
         protected void SelectElement(int indexToSelect)
         {
-            ((Label)listContainer.Children[indexToSelect]).Background = new SolidColorBrush(Colours.Red);
+            ((Rectangle)listContainer.Children[indexToSelect]).Fill = new SolidColorBrush(Colours.Red);
         }
 
         protected void CompareElement(int indexToCompare)
         {
-            ((Label)listContainer.Children[indexToCompare]).Background = new SolidColorBrush(Colours.Green);
+            ((Rectangle)listContainer.Children[indexToCompare]).Fill = new SolidColorBrush(Colours.Green);
         }
 
-
-
         /// <summary>
-        /// This method gets called everytime the sorting algorithm swaps an element
+        /// This method updates the container with the supplied list
         /// </summary>
         /// <param name="list"></param>
         protected void UpdateContainer(IList<int> list)
@@ -98,10 +87,11 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             listContainer.Children.Clear();
             foreach (int i in list)
             {
-                Label listItem = new Label
+                Rectangle listItem = new Rectangle
                 {
-                    Background = SystemColors.ActiveBorderBrush,
+                    Fill = new SolidColorBrush(Colours.Black),
                     // Margin and not height so the label starts from bottom
+                    // The next line sets the top margin for each label. 
                     Margin = new Thickness(0, listContainer.Height - (i * unitHeight), 0, 0),
                     Width = unitWidth
                 };

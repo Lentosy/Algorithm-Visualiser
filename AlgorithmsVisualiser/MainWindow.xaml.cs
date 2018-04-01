@@ -25,16 +25,21 @@ namespace AlgorithmsVisualiser
 
         public MainWindow()
         {
+
+
+
             InitializeComponent();
+
             ResizeMode = ResizeMode.NoResize;
 
             InitializeSortingAlgorithms();
             InitializeListOrders();
 
-            list.Fill(new AscendingFillStrategy(), 50);
-
             currentSortAlgorithm = new InsertionSort(listContainer);
+            list.Fill(new AscendingFillStrategy(), 50);
             currentSortAlgorithm.InitializeContainer(list);
+
+
         }
 
         #region Private methods
@@ -155,7 +160,7 @@ namespace AlgorithmsVisualiser
         {
             int msDelay = (int)SliderSpeed.Value;
             LabelSpeed.Content = msDelay;
-            if (currentSortAlgorithm != null)
+            if(currentSortAlgorithm != null)
             {
                 currentSortAlgorithm.Delay = msDelay;
             }

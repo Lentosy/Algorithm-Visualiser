@@ -8,6 +8,11 @@ namespace AlgorithmsVisualiser.Helpers
      */
     public class Colours
     {
+        public static Color Black {
+            get {
+                return Color.FromArgb(255, 0, 0, 0);
+            }
+        }
         public static Color Red {
             get {
                 return Color.FromArgb(255, 255, 0, 0);
