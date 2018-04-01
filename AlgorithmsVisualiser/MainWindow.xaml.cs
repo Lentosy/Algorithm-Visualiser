@@ -3,6 +3,8 @@ using AlgorithmsVisualiser.Sorting;
 using AlgorithmsVisualiser.Sorting.Algorithms;
 using AlgorithmsVisualiser.Sorting.Filling;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,43 +22,35 @@ namespace AlgorithmsVisualiser
         /// </summary>
         private SortList list = new SortList();
 
+        private IList<SortAlgorithm> allSortAlgorithms;
         private SortAlgorithm currentSortAlgorithm;
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-        
+
             InitializeSortingAlgorithms();
             InitializeListOrders();
 
-            currentSortAlgorithm = new InsertionSort(listContainer);
             list.Fill(new AscendingFillStrategy(), 50);
+            currentSortAlgorithm = allSortAlgorithms[0];
             currentSortAlgorithm.InitializeContainer(list);
-
-
         }
 
         #region Private methods
         private void InitializeSortingAlgorithms()
         {
-            foreach (ESortingAlgorithm sortingAlgorithm in Enum.GetValues(typeof(ESortingAlgorithm)))
+            allSortAlgorithms = SortAlgorithms.GetSortAlgorithms(listContainer);
+            int index = 0;
+            foreach(SortAlgorithm sortAlgorithm in allSortAlgorithms)
             {
-                string[] parts = sortingAlgorithm.ToString().Split('_');
-                StringBuilder name = new StringBuilder();
-                foreach (string s in parts)
-                {
-                    name.Append(s.InitCap());
-                    name.Append(" ");
-                }
-
                 ComboBoxSortingAlgorithms.Items.Add(new ComboBoxItem
                 {
-                    Tag = sortingAlgorithm,
-                    Content = name.ToString(),
+                    Content = sortAlgorithm.Name,
+                    Tag = index++       // Tag contains the index this algorithm takes in the allAlgorithms list   
                 });
             }
-
             ((ComboBoxItem)ComboBoxSortingAlgorithms.Items[0]).IsSelected = true;
         }
 
@@ -130,22 +124,7 @@ namespace AlgorithmsVisualiser
         private void ComboBoxSortingAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem cItem = (ComboBoxItem)ComboBoxSortingAlgorithms.SelectedItem;
-            switch (cItem.Tag)
-            {
-                case ESortingAlgorithm.INSERTION_SORT:
-                    currentSortAlgorithm = new InsertionSort(listContainer);
-                    break;
-                case ESortingAlgorithm.SELECTION_SORT:
-                    currentSortAlgorithm = new SelectionSort(listContainer);
-                    break;
-                case ESortingAlgorithm.COUNTING_SORT:
-                    currentSortAlgorithm = new CountingSort(listContainer);
-                    break;
-                case ESortingAlgorithm.BOGO_SORT:
-                    currentSortAlgorithm = new BogoSort(listContainer);
-                    break;
-            }
-
+            currentSortAlgorithm = allSortAlgorithms[(int)cItem.Tag];
         }
 
         private void SliderElementCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -153,12 +132,11 @@ namespace AlgorithmsVisualiser
             LabelElementCount.Content = (int)SliderElementCount.Value;
         }
 
-
         private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int msDelay = (int)SliderSpeed.Value;
             LabelSpeed.Content = msDelay;
-            if(currentSortAlgorithm != null)
+            if (currentSortAlgorithm != null)
             {
                 currentSortAlgorithm.Delay = msDelay;
             }

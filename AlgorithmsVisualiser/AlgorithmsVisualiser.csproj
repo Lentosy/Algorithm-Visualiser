@@ -58,8 +58,8 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\Colours.cs" />
     <Compile Include="Helpers\EOrder.cs" />
-    <Compile Include="Helpers\ESortingAlgorithm.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\SortAlgorithms.cs" />
     <Compile Include="Sorting\Algorithms\BogoSort.cs" />
     <Compile Include="Sorting\Algorithms\CountingSort.cs" />
     <Compile Include="Sorting\Filling\AscendingFillStrategy.cs" />
