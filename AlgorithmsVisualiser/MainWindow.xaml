@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sorting="clr-namespace:AlgorithmsVisualiser.Sorting"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="950">
-    <Grid Background="snow">
+        Title="MainWindow" Height="700" Width="950"
+        ResizeMode="NoResize">
+    <Grid Background="Snow">
         <StackPanel Margin="0,0,297,624"
                     Orientation="Horizontal">
 

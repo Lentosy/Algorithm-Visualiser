@@ -25,13 +25,8 @@ namespace AlgorithmsVisualiser
 
         public MainWindow()
         {
-
-
-
             InitializeComponent();
-
-            ResizeMode = ResizeMode.NoResize;
-
+        
             InitializeSortingAlgorithms();
             InitializeListOrders();
 
