@@ -22,12 +22,12 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
                 int h = list[i];
                 SelectElement(i);
-                await Task.Delay(Delay);
+                await Wait();
                 int j = i - 1;
                 while (j >= 0 && h < list[j])
                 {
                     CompareElement(j);
-                    await Task.Delay(Delay);
+                    await Wait();
                     list[j + 1] = list[j];
                     j--;
                 }

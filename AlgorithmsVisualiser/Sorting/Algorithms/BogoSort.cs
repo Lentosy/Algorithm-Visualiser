@@ -15,7 +15,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             while (!IsSorted(list))
             {
                 list.Shuffle();
-                await Task.Delay(Delay);
+                await Wait();
                 UpdateContainer(list);
             }
         }

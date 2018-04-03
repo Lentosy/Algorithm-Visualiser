@@ -34,7 +34,7 @@ namespace AlgorithmsVisualiser
             InitializeListOrders();
 
             list.Fill(new AscendingFillStrategy(), 50);
-            currentSortAlgorithm = allSortAlgorithms[0];
+            currentSortAlgorithm = allSortAlgorithms[0]; // Insertion Sort
             currentSortAlgorithm.InitializeContainer(list);
         }
 

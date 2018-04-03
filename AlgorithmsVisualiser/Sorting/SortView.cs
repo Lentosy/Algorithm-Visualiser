@@ -33,10 +33,12 @@ namespace AlgorithmsVisualiser.Sorting
             {
                 Rectangle listItem = new Rectangle
                 {
-                    Fill = new SolidColorBrush(Colours.Default),
+                    Stroke = new SolidColorBrush(Colours.White), // outline
+                    Fill = new SolidColorBrush(Colours.Default), 
                     // Margin and not height so the label starts from bottom
                     // The next line sets the top margin for each label. 
                     Margin = new Thickness(0, Height - (i * UnitHeight), 0, 0),
+
                     Width = UnitWidth
                 };
                 Children.Add(listItem);

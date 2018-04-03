@@ -1,6 +1,7 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -25,12 +26,15 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             {
                 count[list[i]]++;
                 CountFrequencyFor(i);
-                await Task.Delay(Delay);
+                await Wait();
             }
 
             for(i = 1; i < count.Length; i++)
             {
+
                 count[i] += count[i - 1];
+                CountFrequencyFor(i - 1);
+                await Wait();
             }
 
             for(i = 0; i < list.Count; i++)

@@ -29,7 +29,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
                         imax = j;
                         SelectMax(j);
                     }
-                    await Task.Delay(Delay);
+                    await Wait();
                 }
 
                 int temp = list[i];

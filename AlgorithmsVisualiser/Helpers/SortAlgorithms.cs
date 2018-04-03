@@ -9,14 +9,13 @@ namespace AlgorithmsVisualiser.Helpers
 
         public static IList<SortAlgorithm> GetSortAlgorithms(SortView sortView)
         {
-            List<SortAlgorithm> sortAlgorithms = new List<SortAlgorithm>
+            return new List<SortAlgorithm>
             {
                 new InsertionSort(sortView),
                 new SelectionSort(sortView),
                 new CountingSort(sortView),
                 new BogoSort(sortView)
             };
-            return sortAlgorithms;
         }
     }
 }

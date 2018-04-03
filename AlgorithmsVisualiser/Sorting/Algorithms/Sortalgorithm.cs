@@ -1,6 +1,7 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -42,6 +43,14 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// </summary>
         public abstract string Name {
             get;
+        }
+
+        /// <summary>
+        /// Waits for the given amount of the property Delay
+        /// </summary>
+        public async Task Wait() {
+            await Task.Delay(Delay);
+            return;
         }
 
         /// <summary>

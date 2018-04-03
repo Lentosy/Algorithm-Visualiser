@@ -13,6 +13,12 @@ namespace AlgorithmsVisualiser.Helpers
                 return Color.FromArgb(255, 0, 0, 0);
             }
         }
+
+        public static Color White {
+            get {
+                return Color.FromArgb(255, 255, 255, 255);
+            }
+        }
         public static Color Red {
             get {
                 return Color.FromArgb(255, 255, 0, 0);
