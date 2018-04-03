@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace AlgorithmsVisualiser
 {
@@ -29,6 +31,20 @@ namespace AlgorithmsVisualiser
         public MainWindow()
         {
             InitializeComponent();
+
+            // programmatically sets the margin of each menu item, which is encapsulated in a StackPanel, by drawing 
+            // a small rectangle beneath it (acting as a line)
+            foreach(StackPanel s in menuContainer.Children)
+            {    
+                s.Children.Add(new Rectangle
+                {
+                    Fill = new SolidColorBrush(Colours.Default),
+                    Height = 2,
+                    Margin = new Thickness(0, 10, 0, 0)
+                    
+                });
+            }
+
 
             InitializeSortingAlgorithms();
             InitializeListOrders();

@@ -1,6 +1,5 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -14,7 +13,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         public override string Name => "Selection Sort";
 
-        public async override void Sort(IList<int> list)
+        public async override void Sort(SortList list)
         {
             for(int i = list.Count - 1; i > 0; i--)
             {

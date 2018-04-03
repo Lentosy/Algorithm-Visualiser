@@ -1,8 +1,5 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -16,7 +13,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         public override string Name => "Counting Sort";
 
-        public async override void Sort(IList<int> list)
+        public async override void Sort(SortList list)
         {
             int[] output = new int[list.Count];
             int[] count = new int[list.Count + 1];

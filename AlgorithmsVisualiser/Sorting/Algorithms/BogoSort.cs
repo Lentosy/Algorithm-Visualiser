@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AlgorithmsVisualiser.Helpers;
 
 namespace AlgorithmsVisualiser.Sorting.Algorithms
 {
@@ -10,7 +8,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         public override string Name => "Bogo Sort";
 
-        public async override void Sort(IList<int> list)
+        public async override void Sort(SortList list)
         {
             while (!IsSorted(list))
             {
@@ -20,7 +18,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
             }
         }
 
-        private bool IsSorted(IList<int> list)
+        private bool IsSorted(SortList list)
         {
             for(int i = 0; i < list.Count - 1; i++)
             {

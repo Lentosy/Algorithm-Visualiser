@@ -1,9 +1,6 @@
 ﻿using AlgorithmsVisualiser.Helpers;
 using System.Collections.Generic;
-
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -15,7 +12,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
 
         public override string Name => "Insertion Sort";
 
-        public async override void Sort(IList<int> list)
+        public async override void Sort(SortList list)
         {
             for (int i = 1; i < list.Count; i++)
             {

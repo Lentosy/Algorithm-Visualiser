@@ -37,7 +37,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// algorithm that is used as the concrete implementation.
         /// </summary>
         /// <param name="list">The list to sort</param>
-        public abstract void Sort(IList<int> list);
+        public abstract void Sort(SortList list);
         /// <summary>
         /// Gets the name of the sorting algorithm
         /// </summary>
@@ -78,7 +78,7 @@ namespace AlgorithmsVisualiser.Sorting.Algorithms
         /// This method updates the whole container with the list
         /// </summary>
         /// <param name="list"></param>
-        protected void UpdateContainer(IList<int> list)
+        protected void UpdateContainer(SortList list)
         {
             for (int i = 0; i < list.Count; i++)
             {
